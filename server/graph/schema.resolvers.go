@@ -1,11 +1,5 @@
 package graph
 
-// This file will be automatically regenerated based on the schema, any resolver implementations
-// will be copied through when generating and any unknown code will be moved to the end.
-
-// GraphQl in Go - GQLGen Tutorial
-//https://www.youtube.com/watch?v=O6jYy421tGw&t=783s
-
 import (
 	"context"
 	"fmt"
@@ -13,6 +7,16 @@ import (
 	"github.com/AshleyCoder3/GolangTodo/graph/model"
 	"strconv"
 )
+
+// This file will be automatically regenerated based on the schema, any resolver implementations
+// will be copied through when generating and any unknown code will be moved to the end.
+
+/* Tutorials I used in order
+	1.  Build a Go Rest Api, React.js & TypeScript Todo Application.
+		- https://www.youtube.com/watch?v=QevhhM_QfbM
+ 	2.	GraphQl in Go - GQLGen Tutorial
+		- https://www.youtube.com/watch?v=O6jYy421tGw&t=783s
+*/
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
 	// add to the list of Todos
