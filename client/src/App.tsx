@@ -51,9 +51,11 @@ function App() {
                                 </ThemeIcon>) : (<ThemeIcon color="gray" size={24} radius="xl">
                                     <CheckCircleFillIcon size={20}/>
                                 </ThemeIcon>)
-                            }
-
-                        >{todo.title}</List.Item>
+                            }>
+                            {todo.title}
+                            <br/>
+                            <sub>{todo.body}</sub>
+                        </List.Item>
                     );
                 })}
             </List>

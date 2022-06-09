@@ -4,7 +4,8 @@
 
 type Todo {
   id: ID!
-  text: String!
+  title: String!
+  body: String!
   done: Boolean!
   user: User!
 }
@@ -14,15 +15,18 @@ type User {
   name: String!
 }
 
+#GET
 type Query {
   todos: [Todo!]!
+  user: [User]
 }
 
 input NewTodo {
-  text: String!
+  title: String!
+  body: String!
   userId: String!
 }
-
+#POST PUT do stuff
 type Mutation {
   createTodo(input: NewTodo!): Todo!
 }

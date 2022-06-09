@@ -1,6 +1,10 @@
 package graph
 
-import "github.com/AshleyCoder3/GolangTodo/graph/model"
+//go:generate go run github.com/99designs/gqlgen generate
+
+import (
+	"github.com/AshleyCoder3/GolangTodo/graph/model"
+)
 
 // This file will not be regenerated automatically.
 //
@@ -10,4 +14,5 @@ import "github.com/AshleyCoder3/GolangTodo/graph/model"
 
 type Resolver struct {
 	TodosList []*model.Todo
+	UserList  []*model.User
 }

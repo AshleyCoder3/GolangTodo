@@ -1,29 +1,24 @@
 package graph
 
-import (
-	"context"
-	"fmt"
-	"github.com/AshleyCoder3/GolangTodo/graph/generated"
-	"github.com/AshleyCoder3/GolangTodo/graph/model"
-	"strconv"
-)
-
 // This file will be automatically regenerated based on the schema, any resolver implementations
 // will be copied through when generating and any unknown code will be moved to the end.
 
-/* Tutorials I used in order
-	1.  Build a Go Rest Api, React.js & TypeScript Todo Application.
-		- https://www.youtube.com/watch?v=QevhhM_QfbM
- 	2.	GraphQl in Go - GQLGen Tutorial
-		- https://www.youtube.com/watch?v=O6jYy421tGw&t=783s
-*/
+import (
+	"context"
+	"fmt"
+	"strconv"
+
+	"github.com/AshleyCoder3/GolangTodo/graph/generated"
+	"github.com/AshleyCoder3/GolangTodo/graph/model"
+)
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
 	// add to the list of Todos
 	todo := &model.Todo{
-		ID:   strconv.Itoa(len(r.TodosList) + 1),
-		Text: input.Text,
-		Done: false,
+		ID:    strconv.Itoa(len(r.TodosList) + 1),
+		Title: input.Title,
+		Body:  input.Body,
+		Done:  false,
 		User: &model.User{
 			ID:   input.UserID,
 			Name: fmt.Sprintf("Ashley%s", strconv.Itoa(len(r.TodosList)+1)),
@@ -32,14 +27,8 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 
 	r.TodosList = append(r.TodosList, todo)
 	return todo, nil
-
 }
 
-// Todos * = pointer - memory address of the variable
-//then & needed to show/go to location
-//then dereference with *
-
-//		this object	<== function of
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	// return list of todos
 	/* return []*model.Todo{
@@ -57,6 +46,10 @@ func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	return r.TodosList, nil
 }
 
+func (r *queryResolver) User(ctx context.Context) ([]*model.User, error) {
+	return r.UserList, nil
+}
+
 // Mutation returns generated.MutationResolver implementation.
 func (r *Resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
 
@@ -65,3 +58,11 @@ func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
+
+// !!! WARNING !!!
+// The code below was going to be deleted when updating resolvers. It has been copied here so you have
+// one last chance to move it out of harms way if you want. There are two reasons this happens:
+//  - When renaming or deleting a resolver the old code will be put in here. You can safely delete
+//    it when you're done.
+//  - You have helper methods in this file. Move them out to keep these resolver files clean.
+type todoResolver struct{ *Resolver }
