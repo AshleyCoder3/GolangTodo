@@ -31,19 +31,29 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	// return list of todos
-	/* return []*model.Todo{
+	return []*model.Todo{
 		{
-			ID:   "123",
-			Text: "testing",
-			Done: false,
+			ID:    "123",
+			Title: "testing",
+			Body:  "yayyyyy",
+			Done:  false,
+			User: &model.User{
+				ID:   "user1",
+				Name: "Ashley",
+			},
+		},
+		{
+			ID:    "222",
+			Title: "testing maybe",
+			Body:  "yayyyyy",
+			Done:  true,
 			User: &model.User{
 				ID:   "user1",
 				Name: "Ashley",
 			},
 		},
 	}, nil
-	*/
-	return r.TodosList, nil
+	//return r.TodosList, nil
 }
 
 func (r *queryResolver) User(ctx context.Context) ([]*model.User, error) {
